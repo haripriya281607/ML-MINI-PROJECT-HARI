@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detection</title>
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="card">
+
+            <div class="logo">📰</div>
+
+            <h1>FAKE NEWS DETECTION</h1>
+
+            <p class="subtitle">
+                Intelligent News Classification Using Machine Learning
+            </p>
+
+            <form method="POST">
+                <label>Enter Your News Statement</label>
+
+                <textarea name="news"
+                    placeholder="Paste your news statement here..."
+                    required>{{ news or '' }}</textarea>
+
+                <button type="submit">🔍 Analyze News</button>
+            </form>
+
+            {% if prediction %}
+            <div class="result {% if prediction == 'FAKE' %}fake{% elif prediction == 'REAL' %}real{% else %}error{% endif %}">
+                <p class="result-label">ANALYSIS RESULT</p>
+                <h2>{{ prediction }}</h2>
+                <p>
+                    {% if prediction == 'FAKE' %}
+                    This statement has been classified as Fake.
+                    {% elif prediction == 'REAL' %}
+                    This statement has been classified as Real.
+                    {% else %}
+                    {{ prediction }}
+                    {% endif %}
+                </p>
+            </div>
+            {% endif %}
+
+            <div class="footer">
+                <p>Powered by Machine Learning & NLP</p>
+                <p class="disclaimer">
+                    Note: Automated classification is not independent
+                    fact-checking. Always verify the original source.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
